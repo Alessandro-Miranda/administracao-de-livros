@@ -1,0 +1,116 @@
+/*Estilos globais*/
+html
+{
+    box-sizing: border-box;
+}
+*, *::after, *::before
+{
+    box-sizing: inherit;
+}
+body
+{
+    font-family: 'Sans Serif';
+}
+main
+{
+    background: rgba(211, 211, 211, .4);
+    border-top: 1px solid transparent;
+    min-height: 100vh;
+}
+.container
+{
+    max-width: 960px;
+    margin: 0 auto;
+}
+@font-face
+{
+    font-family: 'blowbrush';
+    src: url(../fonts/blowbrush/blowbrush.otf);
+}
+@font-face
+{
+    font-family: 'Slope';
+    src: url(../fonts/Slope/Slopes.ttf);
+}@font-face
+{
+    font-family: 'Junction Regular';
+    src: url(../fonts/junction-master/Junction-regular.otf)
+}
+/*Fim dos estilos globais*/
+
+.cabecalho
+{
+    padding: 1.475em 0;
+    box-shadow: 0 0 2.5px rgba(0, 0, 0, .5);
+}
+.cabecalho .container
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.cabecalho__titulo
+{
+    font-size: 1.575em;
+    font-family: 'blowbrush';
+    text-decoration: underline;
+}
+.cabecalho__menu ul li
+{
+    display: inline-block;
+}
+.cabecalho__menu ul li:first-child
+{
+    margin: 0;
+}
+.cabecalho__menu__botao
+{
+    padding: .575em 0 .175em 0;
+    font-family: 'Slope';
+    font-size: 1.275em;
+    text-transform: uppercase;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgba(74.9%, 69%, 65.5%, .5);
+    margin-left: 2.575em;
+    color: rgb(74.9%, 69%, 65.5%);
+    transition: all .8s ease;
+}
+.cabecalho__menu__botao:hover
+{
+    color: black;
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
+    cursor: pointer;
+}
+.listagem
+{
+    margin-top: 4em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.listagem__titulo
+{
+    font-size: 1.5em;
+    font-family: 'Junction Regular';
+    text-transform: capitalize;
+    text-align: center;
+}
+.listagem__informacoes
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2em;
+    padding-bottom: .375em;
+    border-bottom: 1px solid rgba(0 , 0, 0, .2);
+}
+.listagem__informacoes__titulos
+{
+    font-family: 'Junction Regular';
+    color: gray;
+    display: inline-block;
+    margin-right: 1.375em;
+}
