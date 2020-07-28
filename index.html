@@ -9,15 +9,19 @@
     
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/index.css" />
+
+        <script src="https://kit.fontawesome.com/ee53ceb71a.js" crossorigin="anonymous"></script>
+        <script src="js/index.js"></script>
+        <script src="js/utils.js"></script>
     </head>
-    <body>
+    <body onload="return getBooks();">
         <header class="cabecalho">
             <div class="container">
                 <h1 class="cabecalho__titulo">AleBooks - Gerenciador de livros</h1>
                 <nav class="cabecalho__menu">
                     <ul>
                         <li>
-                            <button class="cabecalho__menu__botao">
+                            <button class="cabecalho__menu__botao" onclick="showRegistrationForm();">
                                 cadastrar novo livro
                             </button>
                         </li>
@@ -31,12 +35,54 @@
                 <ul class="listagem__informacoes">
                     <li class="listagem__informacoes__titulos">Nome</li>
                     <li class="listagem__informacoes__titulos">Autor</li>
-                    <li class="listagem__informacoes__titulos">Quantidade de páginas</li>
+                    <li class="listagem__informacoes__titulos">Páginas</li>
                     <li class="listagem__informacoes__titulos">Preço</li>
                     <li class="listagem__informacoes__titulos">Ativo / Inativo</li>
-                    <li class="listagem__informacoes__titulos">Data de inclusão / edição</li>
+                    <li class="listagem__informacoes__titulos">Inclusão / edição</li>
+                    <button class="listagem__botoes"></button>
+                    <button class="listagem__botoes"></button>
                 </ul>
+                <!--Div Criada para inserir todos os dados de forma dinâmica durante a resposta do banco-->
+                <div id="root"></div>
+
+                <div class="cadastro" id="formCadastro">
+                    <div class="cadastro__header">
+                        <h2 class="cadastro__header__titulo">Cadastrar novo livro</h2>
+                        <button onclick="closeRegistrationForm()">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <form class="cadastro__form" method="POST"
+                        action="http://localhost/administracao-de-livros/php/cadastro.php">
+                        <fieldset onclick="labelEffect('nome')" class="cadastro__form__grupos">
+                            <label id="nome" class="cadastro__form__grupos__label">Título do Livro</label>
+                            <input type="text" name="nome" minlength="5" maxlength="200" onfocus="labelEffect('nome')"
+                                class="cadastro__form__inputs" id="nomeInput" required />
+                        </fieldset>
+                        
+                        <fieldset onclick="labelEffect('autor')" class="cadastro__form__grupos">
+                            <label id="autor" class="cadastro__form__grupos__label">Nome do Autor</label>
+                            <input type="text" name="autor" minlength="10" maxlength="45" onfocus="labelEffect('autor')"
+                                class="cadastro__form__inputs" id="autorInput" required />
+                        </fieldset>
+                        
+                        <fieldset  onclick="labelEffect('paginas')" class="cadastro__form__grupos">
+                            <label id="paginas" class="cadastro__form__grupos__label">Quantiadade de páginas</label>
+                            <input type="number" name="paginas" placegolder="100" class="cadastro__form__inputs" id="paginasInput"
+                                min="1" max="1500" onfocus="labelEffect('paginas')" required />
+                        </fieldset>
+
+                        <fieldset onclick="labelEffect('valor')" class="cadastro__form__grupos">
+                            <label id="valor" class="cadastro__form__grupos__label">Valor do livro</label>
+                            <input type="text" name="valor" class="cadastro__form__inputs" id="valorInput"
+                                onfocus="labelEffect('valor')" onkeyup="formatMoney(this.value);" required/>
+                        </fieldset>
+                        <input type="submit" class="cadastro__form__submit" value="Cadastrar" />
+                    </form>
+                </div>
             </section>
+            
         </main>
     </body>
 </html>
