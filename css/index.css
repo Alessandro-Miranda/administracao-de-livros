@@ -19,8 +19,15 @@ main
 }
 .container
 {
-    max-width: 960px;
+    max-width: 1000px;
     margin: 0 auto;
+}
+.hide_body
+{
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
 }
 @font-face
 {
@@ -37,7 +44,7 @@ main
     src: url(../fonts/junction-master/Junction-regular.otf)
 }
 /*Fim dos estilos globais*/
-
+/*Estilo do cabeçalho da página principal*/
 .cabecalho
 {
     padding: 1.475em 0;
@@ -85,6 +92,8 @@ main
     border-bottom: 1px solid rgba(0, 0, 0, .5);
     cursor: pointer;
 }
+/*Fim do estilo do cabeçalho da página*/
+/*Estilo da seção onde será listado todos os livros presentes no DB*/
 .listagem
 {
     margin-top: 4em;
@@ -102,10 +111,9 @@ main
 .listagem__informacoes
 {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 2em;
-    padding-bottom: .375em;
-    border-bottom: 1px solid rgba(0 , 0, 0, .2);
+    margin-bottom: .875em;
 }
 .listagem__informacoes__titulos
 {
@@ -113,4 +121,136 @@ main
     color: gray;
     display: inline-block;
     margin-right: 1.375em;
+    width: 8em;
+}
+.listagem__informacoes--itens
+{
+    text-transform: capitalize;
+    display: inline-block;
+    width: max-content;
+    border: none;
+    box-shadow: 0 0 2.5px rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    padding: .875em .175em .875em .375em;
+    background: rgba(255, 255, 255, 1);
+    margin-top: 0;
+}
+.listagem__informacoes__descricoes:nth-child(6)
+{
+    width: 8.25em;
+}
+.listagem__informacoes__descricoes
+{
+    display: inline-block;
+    width: 9.75em;
+    height: 1em;
+    vertical-align: middle;
+    overflow: hidden;
+    color: rgba(0, 0, 0, .8)
+}
+.listagem__informacoes__descricoes--nome
+{
+    color: rgba(218, 165, 32, .8);
+    font-weight: bold;
+}
+.listagem__botoes
+{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: red;
+}
+.listagem__botoes i[class="far fa-edit"]
+{
+    color: black;
+}
+/*Fim do estilo da seção de listagem*/
+
+/*Estilo do modal de cadastro*/
+.cadastro
+{
+    position: absolute;
+    top: 10%;
+    width: 40%;
+    left: 30%;
+    background-color: white;
+    box-shadow: 0 0 2.5px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;   
+    height: 0;
+    overflow: hidden;
+    transition: all .8s ease;
+}
+.cadastro--show
+{
+    height: 80%;
+    overflow: visible;
+}
+.cadastro__header
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 1.375em;
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
+    padding: .875em;
+}
+.cadastro__header__titulo
+{
+    font-family: 'Junction Regular';
+    font-size: 1.375em;
+    display: inline-block;
+}
+.cadastro__header button
+{
+    background: transparent;
+    outline: none;
+    border: none;
+}
+.cadastro__header i[class^='fa']
+{
+    color: red;
+    font-size: 1.275em;
+}
+.cadastro__form
+{
+    padding: .875em 1.375em 2em 1.375em;
+    width: 100%;
+}
+.cadastro__form__inputs
+{
+    width: 100%;
+    height: 3.875em;
+    border-radius: 1.93em;
+    margin-bottom: 2em;
+    padding: 1em;
+    outline: none;
+}
+.cadastro__form__grupos
+{
+    position: relative;
+}
+.cadastro__form__grupos__label
+{
+    position: absolute;
+    top: 30%;
+    left: 1em;
+    font-size: .775em;
+    color: gray;
+    font-family: "Junction Regular";
+    transition: all .8s ease;
+}
+.cadastro__form__submit
+{
+    background: lightgray;
+    width: 6em;
+    font-size: 1em;
+    font-weight: bold;
+    padding: .575em;
+    border: 1px solid black;
+    border-radius: 10px;
 }
