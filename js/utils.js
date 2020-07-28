@@ -5,13 +5,13 @@ const getListHtml = (value) => {
     value.map((elem) => {
         /*Pega o Conteúdo já existente na div root para inserir na sequência o próximo elemento*/
         let previewContent = document.getElementById("root").innerHTML;
-        debugger;
+        
         let date = new Date(elem.data_inclusao_edicao);
         
         document.getElementById("root").innerHTML = `${previewContent} 
         <article class="listagem__informacoes listagem__informacoes--itens">
             <span class="listagem__informacoes__descricoes listagem__informacoes__descricoes--nome">
-                ${elem.nome}
+                ${elem.nome.toString()}
             </span>
             <span class="listagem__informacoes__descricoes">${elem.autor}</span>
             <span class="listagem__informacoes__descricoes">${elem.quant_paginas}</span>
@@ -26,7 +26,7 @@ const getListHtml = (value) => {
                 que seja exibido o dia anterior-->
                 ${date.toLocaleDateString('pt-BR', {timeZone: 'UTC'})}
             </span>
-            <button class="listagem__botoes" onclick=deleteBook(${nome})>
+            <button class="listagem__botoes" onclick="deleteBook('${elem.nome}')">
                 <i class="far fa-trash-alt"></i>
             </button>
             <button class="listagem__botoes">
@@ -34,17 +34,21 @@ const getListHtml = (value) => {
             </button>
         </article>`;
     })
-}
-const deleteBook = (value) => {
-    alert(value)
-    // const url = "http://localhost/administracao-de-livros/php/index.php";
-    // let userConfirm = confirm("Deseja excluir este livro?");
+};
 
-    // if(userConfirm)
-    // {
-    //     fetch(`${url}?nome=${value}`).then(res => res.json()).then(r=>alert(r))
-    // }
-}
+const deleteBook = (value) => {
+    
+    const url = "http://localhost/administracao-de-livros/php/delete.php";
+    let userConfirm = confirm("Deseja excluir este livro?");
+
+    if(userConfirm)
+    {
+        fetch(`${url}?nome=${value}`).then(res => res.json()).then(resp => {
+            return resp > 0 ? window.location.reload() : alert('Erro ao excluir livro');
+        })
+    }
+};
+
 /*Função para formatar o valor digitado no campo "preço do livro" apenas para proporcionar efeito visual*/
 const formatMoney = (e) => {
     let deleteValue ='';
