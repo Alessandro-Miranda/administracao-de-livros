@@ -36,19 +36,6 @@ const getListHtml = (value) => {
     })
 };
 
-const deleteBook = (value) => {
-    
-    const url = "http://localhost/administracao-de-livros/php/delete.php";
-    let userConfirm = confirm("Deseja excluir este livro?");
-
-    if(userConfirm)
-    {
-        fetch(`${url}?nome=${value}`).then(res => res.json()).then(resp => {
-            return resp > 0 ? window.location.reload() : alert('Erro ao excluir livro');
-        })
-    }
-};
-
 /*Função para formatar o valor digitado no campo "preço do livro" apenas para proporcionar efeito visual*/
 const formatMoney = (e) => {
     let deleteValue ='';
@@ -100,4 +87,12 @@ const formatMoney = (e) => {
         document.getElementById("valorInput").value = deleteValue;
         return false;
     }
+}
+
+/*Funções que abre e fecha o modal para cadastro*/
+const showRegistrationForm = () =>{
+    document.getElementById("formCadastro").classList.add("cadastro--show");
+}
+const closeRegistrationForm = () => {
+    document.getElementById("formCadastro").classList.remove("cadastro--show");
 }
