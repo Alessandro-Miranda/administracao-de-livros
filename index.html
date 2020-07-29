@@ -53,8 +53,7 @@
                         </button>
                     </div>
 
-                    <form class="cadastro__form" method="POST"
-                        action="http://localhost/administracao-de-livros/php/cadastro.php">
+                    <form class="cadastro__form" onsubmit="registerNewBook(event)">
                         <fieldset onclick="labelEffect('nome')" class="cadastro__form__grupos">
                             <label id="nome" class="cadastro__form__grupos__label">Título do Livro</label>
                             <input type="text" name="nome" minlength="5" maxlength="200" onfocus="labelEffect('nome')"
@@ -78,7 +77,7 @@
                             <input type="text" name="valor" class="cadastro__form__inputs" id="valorInput"
                                 onfocus="labelEffect('valor')" onkeyup="formatMoney(this.value);" required/>
                         </fieldset>
-                        <input type="submit" class="cadastro__form__submit" value="Cadastrar" />
+                        <button class="cadastro__form__submit" value="Cadastrar" >Cadastrar</button>
                     </form>
                 </div>
             </section>
