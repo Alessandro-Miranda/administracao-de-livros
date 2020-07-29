@@ -1,13 +1,15 @@
 <?php
-
-    $nome = $_POST['nome'];
-    $autor = $_POST['autor'];
-    $paginas = $_POST['paginas'];
-    $valor = $_POST['valor'];
-    $valor = str_replace('.', '', $valor);
-    $valor = str_replace(',', '.', $valor); 
+    header('Content-Type: application/json; charset=UTF-8');
+    
+    $data = json_decode(file_get_contents("php://input"));
+    $name = $data->name;
+    $author = $data->author;
+    $pages = $data->pages;
+    $price = $data->price;
+    $price = str_replace('.', '', $price);
+    $price = str_replace(',', '.', $price); 
     $flag = 1;
-    $dataInclusao = date('Y-m-d');
+    $inclusionDate = date('Y-m-d');
 
     $username = 'root';
     $password = 'gugaBB05!8';
@@ -21,24 +23,24 @@
 
         $result = $connection -> prepare('SELECT * FROM livros WHERE nome=:nome');
         $result -> execute(array(
-            ':nome'=>$nome
+            ':nome'=>$name
         ));
         if($result->rowCount() == 0)
         {
             $result = $connection -> prepare($queryInstruction);
             $result -> execute(array(
-                ':nome' => $nome,
-                ':autor' => $autor,
-                ':paginas' => $paginas,
-                ':valor' => $valor,
+                ':nome' => $name,
+                ':autor' => $author,
+                ':paginas' => $pages,
+                ':valor' => $price,
                 ':flag' => $flag,
-                ':dataInclusao' => $dataInclusao
+                ':dataInclusao' => $inclusionDate
             ));
-            echo 'Livro Cadastrado com sucesso';
+            echo $result->rowCount();
         }
         else
         {
-            echo "Este livro já existe";
+            echo json_encode("Este livro já existe");
         }
         // echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
     }
