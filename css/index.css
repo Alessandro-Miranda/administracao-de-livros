@@ -164,6 +164,10 @@ main
 {
     color: black;
 }
+.listagem__botoes:hover
+{
+    cursor: pointer;
+}
 /*Fim do estilo da seção de listagem*/
 
 /*Estilo do modal de cadastro*/
