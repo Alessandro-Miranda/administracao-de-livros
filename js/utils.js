@@ -29,12 +29,69 @@ const getListHtml = (value) => {
             <button class="listagem__botoes" onclick="deleteBook('${elem.nome}')">
                 <i class="far fa-trash-alt"></i>
             </button>
-            <button class="listagem__botoes">
+            <button class="listagem__botoes"
+                onclick="editRegister('${elem.nome}', '${elem.autor}', '${elem.quant_paginas}',
+                '${parseFloat(elem.preco).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}',
+                '${elem.flag}', '${date.toLocaleDateString('pt-BR', {timeZone: 'UTC'})}')">
                 <i class="far fa-edit"></i>
             </button>
         </article>`;
     })
 };
+
+/*Função que retorna o HTML para a exibição do modal de edição de registro*/
+const getModalHtml = (name, author, pages, price, flag) => {
+    const modal = `
+    <div class="modal__edicao__header">
+        <h2 class="modal__edicao__header__titulo">Editar informações</h2>
+        <button onclick="closeForms('modalEdicao', 'modal__edicao--show')">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <form class="modal__edicao__form" onsubmit="">
+        <fieldset class="modal__edicao__form__grupos">
+            <label id="nome" class="modal__edicao__form__grupos__label">Título do Livro</label>
+            <input type="text" maxlength="200" value="${name}"
+                class="modal__edicao__form__inputs" id="nomeModal" required />
+        </fieldset>
+        
+        <fieldset class="modal__edicao__form__grupos">
+            <label id="autor" class="modal__edicao__form__grupos__label">Nome do Autor</label>
+            <input type="text" minlength="10" maxlength="45" value="${author}"
+                class="modal__edicao__form__inputs" id="autorModal" required />
+        </fieldset>
+        
+        <fieldset class="modal__edicao__form__grupos">
+            <label id="paginas" class="modal__edicao__form__grupos__label">Quantiadade de páginas</label>
+            <input type="number" placegolder="100" class="modal__edicao__form__inputs" id="paginasModal"
+                min="1" max="1500" value=${pages} required />
+        </fieldset>
+
+        <fieldset class="modal__edicao__form__grupos">
+            <label id="valor" class="modal__edicao__form__grupos__label">Valor do livro</label>
+            <input type="text" class="modal__edicao__form__inputs" id="valorModal"
+                onkeyup="formatMoney(this.value);" value=${price} required/>
+        </fieldset>
+        
+        <fieldset class="modal__edicao__form__grupos">
+            <select class="modal__edicao__form__grupos__select">
+                <option class="modal__edicao__form__inputs" value="1" selected>Inativo</option>
+                <option class="modal__edicao__form__inputs" value="0">Ativo</option>
+            </select>
+        </fieldset>
+        
+        <button class="modal__edicao__form__submit" value="Cadastrar" >Salvar</button>
+    </form>`;
+
+    return modal;
+}
+/*Função para dar efeito na movimentação dos labels no form de cadastro*/
+const labelEffect = (value) => {
+    document.getElementById(value).style.top = '-18px';
+    document.getElementById(value).style.fontSize = '1em';
+    document.getElementById(`${value}Input`).focus();
+}
 
 /*Função para formatar o valor digitado no campo "preço do livro" apenas para proporcionar efeito visual*/
 const formatMoney = (e) => {
@@ -82,17 +139,40 @@ const formatMoney = (e) => {
     }
     if(e.length > 8)
     {
-        alert("Valor máximo permitido: R$9.999,99");
         deleteValue = e.substring(0, e.length-1);
         document.getElementById("valorInput").value = deleteValue;
-        return false;
+        alert("Valor máximo permitido: R$9.999,99");
     }
 }
 
-/*Funções que abre e fecha o modal para cadastro*/
-const showRegistrationForm = () =>{
-    document.getElementById("formCadastro").classList.add("cadastro--show");
+/*Funções que abre e fecha o modal para cadastro e modal de edição*/
+const showForms = (elementId, classToAdd) =>{
+    if(elementId == "modalEdicao")
+    {
+        document.getElementById(elementId).style.top = `${parseInt(pageYOffset) + 10}px`;
+    }
+    document.getElementById(elementId).classList.add(classToAdd);
+    document.querySelector("body").classList.add("hide__body");
 }
-const closeRegistrationForm = () => {
-    document.getElementById("formCadastro").classList.remove("cadastro--show");
+const closeForms = (elementId, classToRemove) => {
+    document.getElementById(elementId).classList.remove(classToRemove);
+    document.querySelector("body").classList.remove("hide__body");
+}
+
+//Função para exibir pop-up de confirmação após cadastrado ou exclusão de livro
+const showConfirmation = (value) => {
+    if(value == 'cadastrado')
+    {
+        document.getElementById("formCadastro").style.transition = 'none';
+        closeForms("formCadastro", "cadastro--show");
+    }
+    document.getElementById("cadastro_exclusaoTitulo").textContent = `Livro ${value} com sucesso!!`;
+    document.getElementById("confirmPopUp").classList.add("cadastro__exclusao__confirmacao--show");
+    document.querySelector("body").classList.add("hide__body");
+}
+//Função para fechar pop up de confirmação
+const closePopUp = () => {
+    document.getElementById("confirmPopUp").classList.remove("cadastro__exclusao__confirmacao--show");
+    document.querySelector("body").classList.remove("hide__body");
+    window.location.reload();
 }
