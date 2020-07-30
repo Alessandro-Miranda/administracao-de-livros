@@ -21,7 +21,8 @@
                 <nav class="cabecalho__menu">
                     <ul>
                         <li>
-                            <button class="cabecalho__menu__botao" onclick="showRegistrationForm();">
+                            <button class="cabecalho__menu__botao"
+                                onclick="showForms('formCadastro', 'cadastro--show');">
                                 cadastrar novo livro
                             </button>
                         </li>
@@ -48,7 +49,7 @@
                 <div class="cadastro" id="formCadastro">
                     <div class="cadastro__header">
                         <h2 class="cadastro__header__titulo">Cadastrar novo livro</h2>
-                        <button onclick="closeRegistrationForm()">
+                        <button onclick="closeForms('formCadastro', 'cadastro--show')">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -81,7 +82,17 @@
                     </form>
                 </div>
             </section>
-            
+
+            <!--Pop-up de confirmação de exclusão ou inclusão de livro-->
+            <div id="confirmPopUp" class="cadastro__exclusao__confirmacao__hide">
+                <button onclick="closePopUp()" class="cadastro__exclusao__confirmacao__button">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <h2 id="cadastro_exclusaoTitulo" class="cadastro__exclusao__confirmacao__titulo"></h2>
+            </div>
+
+            <!--Modal de edição de livro, utiliza a mesma formatação do formulário de cadastro-->
+            <div class="modal__edicao" id="modalEdicao"></div>
         </main>
     </body>
 </html>
