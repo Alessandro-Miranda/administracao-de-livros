@@ -9,7 +9,7 @@
     $price = str_replace('.', '', $price);
     $price = str_replace(',', '.', $price); 
     $flag = 1;
-    $inclusionDate = date('Y-m-d');
+    $inclusionDate = $data->date;
 
     $username = 'root';
     $password = 'gugaBB05!8';
@@ -46,7 +46,7 @@
     }
     catch(PDOException $e)
     {
-        echo json_encode(array('Error: '=>$e->getMessage()));
+        echo json_encode('Error: '.$e->getMessage());
     }
     
 ?>
