@@ -55,9 +55,14 @@ const deleteBook = (value) => {
     }
 };
 
-const editRegister = (name, author, pages, price, flag) => {
+const getRegisterToEdit = (name, author, pages, price, flag) => {
     const html = getModalHtml(name, author, pages, price, flag);
 
     document.getElementById("modalEdicao").innerHTML = html;
+    document.getElementById("saveButton").value = name;
     showForms("modalEdicao", "modal__edicao--show");
+}
+
+const updateBook = (elem, e) => {
+    e.preventDefault();
 }

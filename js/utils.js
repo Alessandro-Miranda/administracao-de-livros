@@ -30,7 +30,7 @@ const getListHtml = (value) => {
                 <i class="far fa-trash-alt"></i>
             </button>
             <button class="listagem__botoes"
-                onclick="editRegister('${elem.nome}', '${elem.autor}', '${elem.quant_paginas}',
+                onclick="getRegisterToEdit('${elem.nome}', '${elem.autor}', '${elem.quant_paginas}',
                 '${parseFloat(elem.preco).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}',
                 '${elem.flag}', '${date.toLocaleDateString('pt-BR', {timeZone: 'UTC'})}')">
                 <i class="far fa-edit"></i>
@@ -81,7 +81,8 @@ const getModalHtml = (name, author, pages, price, flag) => {
             </select>
         </fieldset>
         
-        <button class="modal__edicao__form__submit" value="Cadastrar" >Salvar</button>
+        <button class="modal__edicao__form__submit" id="saveButton"
+            onclick="updateBook(this.value, event)" >Salvar</button>
     </form>`;
 
     return modal;
