@@ -165,12 +165,15 @@ const showConfirmation = (value) => {
     if(value == 'cadastrado')
     {
         document.getElementById("formCadastro").style.transition = 'none';
+        document.getElementById("continueButton").style.display = 'block';
         closeForms("formCadastro", "cadastro--show");
     }
-    else if(value == 'atualizado')
+    else if(value == 'atualizado' || value == 'deletado')
     {
         closeForms("modalEdicao", "modal__edicao--show");
+        document.getElementById("continueButton").style.display = 'none';
     }
+
     /*Define a distância do pop-up em relação ao topo da página pegando
     a quantia de scroll dada pelo usuário e adiconando mais 180px*/
     document.getElementById("confirmPopUp").style.top = `${parseInt(pageYOffset) + 180}px`;
@@ -194,4 +197,12 @@ const formatDate = () => {
     date = date[2] + "-" + date[1] + "-" + date[0];
 
     return date;
+}
+
+/*Função para limpar os inputs do form de cadastro*/
+const clearFormInputs = () => {
+    document.getElementById("nomeInput").value = "";
+    document.getElementById("autorInput").value = "";
+    document.getElementById("paginasInput").value = "";
+    document.getElementById("valorInput").value = "";
 }
