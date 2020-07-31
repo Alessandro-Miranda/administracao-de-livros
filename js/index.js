@@ -20,10 +20,7 @@ const registerNewBook = (e) => {
     let author = document.getElementById("autorInput").value;
     let pages = document.getElementById("paginasInput").value;
     let price = document.getElementById("valorInput").value;
-    let date = new Date();
-    date = date.toLocaleDateString();
-    date = date.split("/");
-    date = date[2] + "-" + date[1] + "-" + date[0];
+    let date = formatDate();
     
     const postObject = JSON.stringify({
         name,
@@ -55,14 +52,44 @@ const deleteBook = (value) => {
     }
 };
 
-const getRegisterToEdit = (name, author, pages, price, flag) => {
-    const html = getModalHtml(name, author, pages, price, flag);
+const getRegisterToEdit = (name, author, pages, price) => {
+    const html = getModalHtml(name, author, pages, price);
 
     document.getElementById("modalEdicao").innerHTML = html;
     document.getElementById("saveButton").value = name;
     showForms("modalEdicao", "modal__edicao--show");
 }
 
-const updateBook = (elem, e) => {
+const updateBook = (value, e) => {
     e.preventDefault();
+
+    const url = "http://localhost/administracao-de-livros/php/update.php";
+
+    let name = document.getElementById("nomeModal").value;
+    let author = document.getElementById("autorModal").value;
+    let pages = document.getElementById("paginasModal").value;
+    let price = document.getElementById("valorModal").value;
+    let flag = document.getElementById("flag");
+    let date = formatDate();
+    let updateCondition = document.getElementById("saveButton").value;
+    
+    flag = flag.options[flag.selectedIndex].value;
+
+    const postObject = JSON.stringify({
+        name,
+        author,
+        pages,
+        price,
+        flag,
+        date,
+        updateCondition
+    });
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: postObject
+    }).then(resp => resp.json()).then( response => response > 0 ? showConfirmation('atualizado') : console.log(response));
 }
