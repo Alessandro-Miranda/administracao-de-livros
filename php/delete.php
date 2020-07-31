@@ -22,5 +22,4 @@
     {
         echo json_encode(array('Error: '=>$e->getMessage()));
     }
-    
 ?>
