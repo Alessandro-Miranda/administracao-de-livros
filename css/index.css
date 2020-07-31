@@ -300,21 +300,10 @@ main
 /*Fim do estilo do formulário de cadastro*/
 
 /*Estilo do pop-up de confirmação de inclusão ou exclusão de livro*/
-@keyframes popUp
-{
-    0%
-    {
-        top: 10vh;
-    }
-    100%
-    {
-        top: 30vh;
-    }
-}
 .cadastro__exclusao__confirmacao__hide
 {
     position: absolute;
-    top: 30vh;
+    top: 13em;
     left: 30%;
     width: 0;
     height: 0;
@@ -323,6 +312,7 @@ main
     border-radius: 10px;
     box-shadow: 0 0 2.5px rgba(0, 0, 0, .5);
     overflow: hidden;
+    transition: all .5s ease-in-out;
 }
 .cadastro__exclusao__confirmacao--show
 {
@@ -330,7 +320,6 @@ main
     height: 150px;
     overflow: visible;
     z-index: 2;
-    animation: popUp .5s ease-in;
 }
 .cadastro__exclusao__confirmacao__titulo
 {
