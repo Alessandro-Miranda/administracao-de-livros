@@ -92,4 +92,12 @@ const updateBook = (value, e) => {
         },
         body: postObject
     }).then(resp => resp.json()).then( response => response > 0 ? showConfirmation('atualizado') : console.log(response));
+};
+
+/*Função para dar continuidade ao cadastro de livros*/
+const continueRegister = () => {
+    document.getElementById("confirmPopUp").classList.remove("cadastro__exclusao__confirmacao--show");
+    document.querySelector("body").classList.remove("hide__body");
+    clearFormInputs();
+    showForms('formCadastro', 'cadastro--show');
 }
