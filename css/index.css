@@ -317,7 +317,7 @@ main
 .cadastro__exclusao__confirmacao--show
 {
     width: 40%;
-    height: 150px;
+    height: max-content;
     overflow: visible;
     z-index: 2;
 }
@@ -326,7 +326,7 @@ main
     font-size: 1.875em;
     font-family: "Junction Regular";
     font-weight: bold;
-    margin: 1.975em .575em;
+    margin: 1.975em .575em 1em .575em;
 }
 .cadastro__exclusao__confirmacao__button
 {
@@ -337,4 +337,32 @@ main
     border: none;
     color: red;
     font-size: 1.375em;
+}
+.cadastro__exclusao__confirmacao__button--novoCadastro
+{
+    position: unset;
+    font-family: "Junction Regular";
+    font-size: .875em;
+    text-transform: uppercase;
+    color: white;
+    background-color: rgb(26, 115, 232);
+    padding: 1em;
+    margin-left: .875em;
+    margin-bottom: 1.575em;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+.cadastro__exclusao__confirmacao__button--fechar
+{
+    position: unset;
+    font-family: "Junction Regular";
+    font-size: .875em;
+    text-transform: uppercase;
+    color: gray;
+    padding: 1em;
+    margin-left: .875em;
+    margin-bottom: 1.575em;
+    border-radius: 5px;
+    border: 1px solid gray;
+    
 }
