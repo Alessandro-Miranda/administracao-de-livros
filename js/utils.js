@@ -19,7 +19,7 @@ const getListHtml = (value) => {
                 ${parseFloat(elem.preco).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
             </span>
             <span class="listagem__informacoes__descricoes">
-                ${elem.flag === 1 ? 'Ativo' : "inativo"}
+                ${elem.flag == 1 ? "Inativo" : "Ativo"}
             </span>
             <span class="listagem__informacoes__descricoes">
                 <!--Exibe a data sem influência do fuso horário evitando
@@ -31,8 +31,8 @@ const getListHtml = (value) => {
             </button>
             <button class="listagem__botoes"
                 onclick="getRegisterToEdit('${elem.nome}', '${elem.autor}', '${elem.quant_paginas}',
-                '${parseFloat(elem.preco).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}',
-                '${elem.flag}', '${date.toLocaleDateString('pt-BR', {timeZone: 'UTC'})}')">
+                '${parseFloat(elem.preco).toLocaleString('pt-BR', {minimumFractionDigits: 2})}',
+                '${date.toLocaleDateString('pt-BR', {timeZone: 'UTC'})}')">
                 <i class="far fa-edit"></i>
             </button>
         </article>`;
@@ -40,7 +40,7 @@ const getListHtml = (value) => {
 };
 
 /*Função que retorna o HTML para a exibição do modal de edição de registro*/
-const getModalHtml = (name, author, pages, price, flag) => {
+const getModalHtml = (name, author, pages, price) => {
     const modal = `
     <div class="modal__edicao__header">
         <h2 class="modal__edicao__header__titulo">Editar informações</h2>
@@ -75,13 +75,13 @@ const getModalHtml = (name, author, pages, price, flag) => {
         </fieldset>
         
         <fieldset class="modal__edicao__form__grupos">
-            <select class="modal__edicao__form__grupos__select">
+            <select class="modal__edicao__form__grupos__select" id="flag">
                 <option class="modal__edicao__form__inputs" value="1" selected>Inativo</option>
                 <option class="modal__edicao__form__inputs" value="0">Ativo</option>
             </select>
         </fieldset>
         
-        <button class="modal__edicao__form__submit" id="saveButton"
+        <button class="modal__edicao__form__submit" id="saveButton" value="${name}"
             onclick="updateBook(this.value, event)" >Salvar</button>
     </form>`;
 
@@ -167,6 +167,14 @@ const showConfirmation = (value) => {
         document.getElementById("formCadastro").style.transition = 'none';
         closeForms("formCadastro", "cadastro--show");
     }
+    else if(value == 'atualizado')
+    {
+        closeForms("modalEdicao", "modal__edicao--show");
+    }
+    /*Define a distância do pop-up em relação ao topo da página pegando
+    a quantia de scroll dada pelo usuário e adiconando mais 180px*/
+    document.getElementById("confirmPopUp").style.top = `${parseInt(pageYOffset) + 180}px`;
+    
     document.getElementById("cadastro_exclusaoTitulo").textContent = `Livro ${value} com sucesso!!`;
     document.getElementById("confirmPopUp").classList.add("cadastro__exclusao__confirmacao--show");
     document.querySelector("body").classList.add("hide__body");
@@ -176,4 +184,14 @@ const closePopUp = () => {
     document.getElementById("confirmPopUp").classList.remove("cadastro__exclusao__confirmacao--show");
     document.querySelector("body").classList.remove("hide__body");
     window.location.reload();
+}
+
+/*Função para formatar a data para o padrão mysql*/
+const formatDate = () => {
+    let date = new Date();
+    date = date.toLocaleDateString();
+    date = date.split("/");
+    date = date[2] + "-" + date[1] + "-" + date[0];
+
+    return date;
 }
