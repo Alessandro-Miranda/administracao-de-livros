@@ -94,7 +94,7 @@ const labelEffect = (value) => {
     document.getElementById(`${value}Input`).focus();
 }
 
-/*Função para formatar o valor digitado no campo "preço do livro" apenas para proporcionar efeito visual*/
+//Máscara monetária com limite de 9.999,99 
 const formatMoney = (e) => {
     let deleteValue ='';
     let cents = '';
@@ -182,6 +182,7 @@ const showConfirmation = (value) => {
     document.getElementById("confirmPopUp").classList.add("cadastro__exclusao__confirmacao--show");
     document.querySelector("body").classList.add("hide__body");
 }
+
 //Função para fechar pop up de confirmação
 const closePopUp = () => {
     document.getElementById("confirmPopUp").classList.remove("cadastro__exclusao__confirmacao--show");

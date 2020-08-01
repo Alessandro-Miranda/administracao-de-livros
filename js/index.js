@@ -1,3 +1,4 @@
+//Funções de realização do CRUD no BD (Select, Insert, Update e Delete)
 const getBooks = () => {
     const url = 'http://localhost/administracao-de-livros/php/index.php';
     let allBooks = [];
@@ -52,14 +53,6 @@ const deleteBook = (value) => {
     }
 };
 
-const getRegisterToEdit = (name, author, pages, price) => {
-    const html = getModalHtml(name, author, pages, price);
-
-    document.getElementById("modalEdicao").innerHTML = html;
-    document.getElementById("saveButton").value = name;
-    showForms("modalEdicao", "modal__edicao--show");
-}
-
 const updateBook = (value, e) => {
     e.preventDefault();
 
@@ -93,8 +86,19 @@ const updateBook = (value, e) => {
         body: postObject
     }).then(resp => resp.json()).then( response => response > 0 ? showConfirmation('atualizado') : console.log(response));
 };
+//Fim das funções de CRUD
 
-/*Função para dar continuidade ao cadastro de livros*/
+//Função que exibe o modal de edição dos livros
+const getRegisterToEdit = (name, author, pages, price) => {
+    const html = getModalHtml(name, author, pages, price);
+
+    document.getElementById("modalEdicao").innerHTML = html;
+    document.getElementById("saveButton").value = name;
+    showForms("modalEdicao", "modal__edicao--show");
+}
+
+/*Função para dar continuidade ao cadastro de livros
+após concluir uma inserção*/
 const continueRegister = () => {
     document.getElementById("confirmPopUp").classList.remove("cadastro__exclusao__confirmacao--show");
     document.querySelector("body").classList.remove("hide__body");
