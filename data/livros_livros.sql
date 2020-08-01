@@ -31,7 +31,7 @@ CREATE TABLE `livros` (
   `data_inclusao_edicao` date DEFAULT NULL,
   PRIMARY KEY (`nome`),
   UNIQUE KEY `nome_UNIQUE` (`nome`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
