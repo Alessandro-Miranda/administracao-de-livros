@@ -27,7 +27,8 @@ __Todo o sistema tem que respeitar as seguintes regras:__
   - Na listagem o preço deve ser formatado no padrão brasileiro;
   - Todas as chamadas devem ser feitas via Ajax;
 
-  __Preview:__
+  __Preview__
+  
   __Home do sistema:__
   ![imagem da home](https://github.com/Alessandro-Miranda/administracao-de-livros/blob/master/screenshots/home.PNG)
   
