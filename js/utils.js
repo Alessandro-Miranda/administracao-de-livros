@@ -26,13 +26,13 @@ const getListHtml = (value) => {
                 que seja exibido o dia anterior-->
                 ${date.toLocaleDateString('pt-BR', {timeZone: 'UTC'})}
             </span>
-            <button class="listagem__botoes" onclick="deleteBook('${elem.nome}')">
+            <button class="listagem__botoes" onclick="deleteConfirm('${elem.nome}')">
                 <i class="far fa-trash-alt"></i>
             </button>
             <button class="listagem__botoes"
                 onclick="getRegisterToEdit('${elem.nome}', '${elem.autor}', '${elem.quant_paginas}',
                 '${parseFloat(elem.preco).toLocaleString('pt-BR', {minimumFractionDigits: 2})}',
-                '${date.toLocaleDateString('pt-BR', {timeZone: 'UTC'})}')">
+                '${date.toLocaleDateString('pt-BR', {timeZone: 'UTC'})}, ${elem.flag}')">
                 <i class="far fa-edit"></i>
             </button>
         </article>`;
@@ -40,7 +40,7 @@ const getListHtml = (value) => {
 };
 
 /*Função que retorna o HTML para a exibição do modal de edição de registro*/
-const getModalHtml = (name, author, pages, price) => {
+const getModalHtml = (name, author, pages, price, flag) => {
     const modal = `
     <div class="modal__edicao__header">
         <h2 class="modal__edicao__header__titulo">Editar informações</h2>
@@ -49,7 +49,7 @@ const getModalHtml = (name, author, pages, price) => {
         </button>
     </div>
 
-    <form class="modal__edicao__form" onsubmit="">
+    <form class="modal__edicao__form">
         <fieldset class="modal__edicao__form__grupos">
             <label id="nome" class="modal__edicao__form__grupos__label">Título do Livro</label>
             <input type="text" maxlength="200" value="${name}"
@@ -76,8 +76,8 @@ const getModalHtml = (name, author, pages, price) => {
         
         <fieldset class="modal__edicao__form__grupos">
             <select class="modal__edicao__form__grupos__select" id="flag">
-                <option class="modal__edicao__form__inputs" value="1" selected>Inativo</option>
-                <option class="modal__edicao__form__inputs" value="0">Ativo</option>
+                <option class="modal__edicao__form__inputs" value="1" ${flag == 1 && selected}>Inativo</option>
+                <option class="modal__edicao__form__inputs" value="0" ${flag == 0 && selected}>Ativo</option>
             </select>
         </fieldset>
         
@@ -86,13 +86,29 @@ const getModalHtml = (name, author, pages, price) => {
     </form>`;
 
     return modal;
+};
+
+/*Função que retorna o html do pop-up de confirmação de exclusão de livro*/
+const getDeleteConfirm = () => {
+    const html = `
+    <p class="popUp__exclusao__titulo">Deseja remover este livro?</p>
+    <div class="popUp__exclusao__buttonsContainer">
+        <button class="popUp__exclusao__buttonsContainer__buttons
+            popUp__exclusao__buttonsContainer__buttons--remover" id="removeButton"
+                onclick="deleteBook(this.value)">Remover</button>
+        <button class="popUp__exclusao__buttonsContainer__buttons
+            popUp__exclusao__buttonsContainer__buttons--cancelar" onclick="cancelDeletion()">Cancelar</button>
+    </div>`
+
+    return html;
 }
+
 /*Função para dar efeito na movimentação dos labels no form de cadastro*/
 const labelEffect = (value) => {
     document.getElementById(value).style.top = '-18px';
     document.getElementById(value).style.fontSize = '1em';
     document.getElementById(`${value}Input`).focus();
-}
+};
 
 //Máscara monetária com limite de 9.999,99 
 const formatMoney = (e) => {
@@ -168,10 +184,14 @@ const showConfirmation = (value) => {
         document.getElementById("continueButton").style.display = 'block';
         closeForms("formCadastro", "cadastro--show");
     }
-    else if(value == 'atualizado' || value == 'deletado')
+    else if(value == 'atualizado')
     {
         closeForms("modalEdicao", "modal__edicao--show");
         document.getElementById("continueButton").style.display = 'none';
+    }
+    else if(value == 'deletado')
+    {
+        document.getElementById("deletePopUp").style.display = "none";
     }
 
     /*Define a distância do pop-up em relação ao topo da página pegando
