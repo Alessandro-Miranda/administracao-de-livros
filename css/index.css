@@ -363,6 +363,70 @@ main
     margin-left: .875em;
     margin-bottom: 1.575em;
     border-radius: 5px;
-    border: 1px solid gray;
+    border: 1px solid gray;   
+}
+/*Fim do estilo do pop-up de confirmação de alteração, exclusão e inclusão de cadastro*/
+
+/*Estilo do pop-up para solicitar confirmação antes de excluir o livro*/
+.popUp__exclusao
+{
+    display: none;
+    position: absolute;
+    top: 5.375em;
+    left: 30%;
+    width: 40%;
+    height: 7em;
+    padding: 1.575em 1.375em;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 0 2.5px rgba(0, 0, 0, .7);
+
+    font-family: "Junction Regular";
+    font-size: 1.875em;
+    font-weight: bold;
+    text-transform: uppercase;
     
+    background: white;
+    z-index: 3;
+}
+.popUp__exclusao__titulo
+{
+    display: block;
+    margin-bottom: 1.375em;
+}
+.popUp__exclusao__buttonsContainer
+{
+    width: max-content;
+    margin: 0 auto;
+}
+.popUp__exclusao__buttonsContainer__buttons
+{
+    font-size: .475em;
+    padding: 1em;
+    width: 8em;
+    border-radius: 20px;
+    border: 1px solid gray;
+    background: transparent;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: gray;
+    outline: none;
+    transition: all 1.2s ease;
+}
+.popUp__exclusao__buttonsContainer__buttons--remover:hover
+{
+    background: rgb(26, 115, 232);
+    color: white;
+}
+.popUp__exclusao__buttonsContainer__buttons--cancelar
+{
+    background: rgb(26, 115, 232);
+    color: white;
+    margin-left: 1em;
+}
+.popUp__exclusao__buttonsContainer__buttons--cancelar:hover
+{
+    background: rgba(211, 211, 211, .8);
+    color: red;
+    cursor: pointer;
 }
