@@ -296,6 +296,7 @@ main
     padding: .575em;
     border: 1px solid black;
     border-radius: 10px;
+    outline: none;
 }
 /*Fim do estilo do formulário de cadastro*/
 
