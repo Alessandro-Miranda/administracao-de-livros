@@ -29,8 +29,8 @@ __Todo o sistema tem que respeitar as seguintes regras:__
 
   __Preview:__
   ![imagem da home](https://github.com/Alessandro-Miranda/administracao-de-livros/blob/master/screenshots/home.PNG)
-  ![tela de cadastro](https://github.com/Alessandro-Miranda/administracao-de-livros/blob/master/screenshots/cadastro.png)
-  ![confirmação de cadastro](https://github.com/Alessandro-Miranda/administracao-de-livros/blob/master/screenshots/confirmação.png)
-  ![tela de edição](https://github.com/Alessandro-Miranda/administracao-de-livros/blob/master/screenshots/Edi%C3%A7%C3%A3o.PNG.png)
+  ![tela de cadastro](https://github.com/Alessandro-Miranda/administracao-de-livros/blob/master/screenshots/cadastro.PNG)
+  ![confirmação de cadastro](https://github.com/Alessandro-Miranda/administracao-de-livros/blob/master/screenshots/confirmação.PNG)
+  ![tela de edição](https://github.com/Alessandro-Miranda/administracao-de-livros/blob/master/screenshots/Edi%C3%A7%C3%A3o.PNG)
 
   OBS.: _A tela de confirmação de cadastro, exclusão e edição é o mesmo modal para ambas as operações o que diferencia são os botões de continuar cadastro e fechar, inseridos e removidos via javascript dependendo da ação feita pelo usuário._
